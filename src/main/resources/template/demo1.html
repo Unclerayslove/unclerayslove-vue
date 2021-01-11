@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- View层 模板 -->
+<div id="app">
+    <p>{{message}}</p>
+    <button v-on:click="reverseMessage">反转消息</button>
+    <br>
+    <span v-bind:title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+    <h1 v-if="flag">Yes</h1>
+    <h1 v-else>No</h1>
+    <li v-for="(item,index) in items">
+        {{item.msg}}----{{index}}
+    </li>
+    输入的文本：<input type="text" v-model="message">
+    <br><br>
+    <textarea name="id" cols="40" rows="8" v-model="msg"></textarea>
+    {{msg}}
+    <br><br>
+    性别：
+    <input type="radio" name="sex" value="男">男
+    <input type="radio" name="sex" value="女">女
+    <br><br>
+    下拉框：
+    <select v-model="select">
+        <option value="" disabled>--请选择--</option>
+        <option>成都</option>
+        <option>重庆</option>
+        <option>北京</option>
+        <option>上海</option>
+    </select>
+    选中了：{{select}}
+</div>
+
+<!-- 1.导入Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    // ViewModel 监听视图变化 数据变化双向绑定
+    var vm = new Vue({
+        el: "#app",
+        // Model : 数据
+        data: {
+            message: "hello,vue!",
+            msg: "textarea msg",
+            flag: true,
+            items: [
+                {msg: "A"},
+                {msg: "B"}
+            ],
+            select: ""
+        },
+        // 方法必须定义在Vue 的 methods对象中，v-on: 事件
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
